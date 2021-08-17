@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Shoot
+  - PlayerShoot
+  - Colisor
+  - Limites
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Inimigos
+  - Player
+  - PlayerShoot
+  - InimigoShoot
+  - Limites tela
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Tiro
+    uniqueID: 1105277753
+    locked: 0
+  - name: Inimigos
+    uniqueID: 937735751
+    locked: 0
+  - name: Player
+    uniqueID: 495731791
+    locked: 0
