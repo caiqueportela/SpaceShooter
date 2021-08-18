@@ -35,28 +35,41 @@ public class InimigoSimples : BaseInimigo
 
     protected void Update()
     {
-        this.Atirar();
+        // Se estiver visivel na tela
+        if (IsVisible())
+        {
+            // Diminuindo tempo pro proximo tiro
+            this._proximoTiro -= Time.deltaTime;
+
+            this.Atirar();
+        }
     }
 
     private void Atirar()
     {
-        if (!this._spriteRenderer.isVisible)
+        // Se proximo tiro não liberado
+        if (this._proximoTiro >= 0)
         {
             return;
         }
-        
-        // Diminuindo tempo pro proximo tiro
-        this._proximoTiro -= Time.deltaTime;
 
-        // Se proximo tiro liberado e estiver visivel na tela
-        if (this._proximoTiro < 0)
-        {
-            // Cria o tiro
-            Instantiate(this.shoot, this.posicaoTiro.position, Quaternion.identity);
+        // Cria o tiro
+        var tiro = Instantiate(this.shoot, this.posicaoTiro.position, Quaternion.identity);
 
-            // Define tempo do próximo tiro
-            this._proximoTiro = Random.Range(this.tempoMinimoTiro, this.tempoMaximoTiro);
-        }
+        DirecionarTiro(tiro);
+
+        // Define tempo do próximo tiro
+        this._proximoTiro = Random.Range(this.tempoMinimoTiro, this.tempoMaximoTiro);
+    }
+
+    protected virtual void DirecionarTiro(GameObject tiro)
+    {
+        tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
+    }
+
+    protected bool IsVisible()
+    {
+        return this._spriteRenderer.isVisible;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

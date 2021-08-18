@@ -119,8 +119,8 @@ MonoBehaviour:
   explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
   shoot: {fileID: 1784849433450131385, guid: 25b7f796472cf6546b73bade148f6880, type: 3}
   posicaoTiro: {fileID: 5295648321922557825}
-  tempoMinimoTiro: 1
-  tempoMaximoTiro: 3
+  tempoMinimoTiro: 1.5
+  tempoMaximoTiro: 2.5
 --- !u!1 &5295648321922557824
 GameObject:
   m_ObjectHideFlags: 0

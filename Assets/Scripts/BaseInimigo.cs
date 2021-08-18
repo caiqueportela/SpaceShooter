@@ -1,3 +1,4 @@
+using System;
 using Interfaces;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
     // Objeto de explosão ao morrer
     [SerializeField] private GameObject explosao;
+
+    // Velocidade do tiro
+    [SerializeField] protected float velocidadeTiro = -10f;
 
     public void TomarDano(int dano)
     {
@@ -27,5 +31,15 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);
         }
+    }
+
+    protected float GetVelocidadeTiro(bool normalized = false)
+    {
+        if (normalized)
+        {
+            return Mathf.Abs(this.velocidadeTiro);
+        }
+
+        return this.velocidadeTiro;
     }
 }

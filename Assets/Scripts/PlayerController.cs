@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour, ITomaDano
     
     // Posicao de onde o tiro será criado
     [SerializeField] private Transform posicaoTiro;
+    
+    // Velocidade do tiro
+    [SerializeField] private float velocidadeTiro = 10f;
 
     // Tempo entre cada tiro
     [SerializeField] private float tempoTiro = 1f;
@@ -44,7 +47,9 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
         if (this._proximoTiro < 0 && Input.GetButton("Fire1"))
         {
-            Instantiate(this.shoot, this.posicaoTiro.position, Quaternion.identity);
+            var tiro = Instantiate(this.shoot, this.posicaoTiro.position, Quaternion.identity);
+
+            tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
 
             this._proximoTiro = this.tempoTiro;
         }
