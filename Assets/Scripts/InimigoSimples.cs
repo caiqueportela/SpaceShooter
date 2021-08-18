@@ -19,15 +19,15 @@ public class InimigoSimples : BaseInimigo
 
     private SpriteRenderer _spriteRenderer;
 
-    private Rigidbody2D _rigidbody2D;
+    protected Rigidbody2D InimigoRigidbody2D;
 
     protected void Start()
     {
         // Resgatando o rigidbody
-        this._rigidbody2D = GetComponent<Rigidbody2D>();
+        this.InimigoRigidbody2D = GetComponent<Rigidbody2D>();
 
         // Definindo velocidade
-        this._rigidbody2D.velocity = new Vector2(0, this.velocidade);
+        this.InimigoRigidbody2D.velocity = new Vector2(0, this.velocidade);
 
         // Resgatando SpriteRenderer do sprite
         this._spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -48,7 +48,7 @@ public class InimigoSimples : BaseInimigo
     private void Atirar()
     {
         // Se proximo tiro não liberado
-        if (this._proximoTiro >= 0)
+        if (this._proximoTiro > 0)
         {
             return;
         }

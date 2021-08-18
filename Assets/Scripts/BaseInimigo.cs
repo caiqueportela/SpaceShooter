@@ -1,4 +1,3 @@
-using System;
 using Interfaces;
 using UnityEngine;
 
@@ -31,6 +30,16 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);
         }
+    }
+
+    protected float GetVelocidade(bool normalized = false)
+    {
+        if (normalized)
+        {
+            return Mathf.Abs(this.velocidade);
+        }
+
+        return this.velocidade;
     }
 
     protected float GetVelocidadeTiro(bool normalized = false)

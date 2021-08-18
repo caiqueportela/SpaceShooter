@@ -642,6 +642,10 @@ PrefabInstance:
       propertyPath: velocidadeTiro
       value: -5
       objectReference: {fileID: 0}
+    - target: {fileID: 12749199, guid: 93a34ed9505c43e48ada802035199760, type: 3}
+      propertyPath: inicioMudarMovimentacaoY
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4989805822647394230, guid: 93a34ed9505c43e48ada802035199760, type: 3}
       propertyPath: m_Name
       value: Inimigo02
@@ -652,11 +656,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4989805822647394231, guid: 93a34ed9505c43e48ada802035199760, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.85
+      value: 2.27
       objectReference: {fileID: 0}
     - target: {fileID: 4989805822647394231, guid: 93a34ed9505c43e48ada802035199760, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.65
+      value: 3.04
       objectReference: {fileID: 0}
     - target: {fileID: 4989805822647394231, guid: 93a34ed9505c43e48ada802035199760, type: 3}
       propertyPath: m_LocalPosition.z
