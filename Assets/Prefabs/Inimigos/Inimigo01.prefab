@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1485971463}
   m_Layer: 6
-  m_Name: "Posi\xE7\xE3o do tiro"
+  m_Name: Posicao Tiro
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -115,12 +115,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: -3
+  vida: 1
+  explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
   shoot: {fileID: 1784849433450131385, guid: 25b7f796472cf6546b73bade148f6880, type: 3}
   posicaoTiro: {fileID: 5295648321922557825}
   tempoMinimoTiro: 1
   tempoMaximoTiro: 3
-  vida: 1
-  explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
 --- !u!1 &5295648321922557824
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,4 +4,9 @@ public class Inimigo02Controller : InimigoSimples
     {
         base.Start();
     }
+
+    private new void Update()
+    {
+        base.Update();
+    }
 }

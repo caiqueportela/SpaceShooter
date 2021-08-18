@@ -24,7 +24,7 @@ public class ShootController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Destruindo se bater com o colisor
-        if (other.CompareTag("Colisor"))
+        if (other.CompareTag(Tags.Colisor))
         {
             Destroy(this.gameObject);
         }

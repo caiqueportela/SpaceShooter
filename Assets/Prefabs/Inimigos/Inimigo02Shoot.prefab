@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4312463483647658963}
   - component: {fileID: 4331985743385930660}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tiro2_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1105277753
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -7531286859611902536, guid: df86a60204afb5d4db3734bf4c68bf8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -94,7 +94,8 @@ GameObject:
   - component: {fileID: -5296513190331765785}
   - component: {fileID: -2937893885886629535}
   - component: {fileID: 2485844060234246733}
-  m_Layer: 0
+  - component: {fileID: 3646877970362066751}
+  m_Layer: 9
   m_Name: Inimigo02Shoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c18878b56fbf254d81c86cffa113ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 15
+  velocidade: -5
   danoCausado: 1
   impactoTiro: {fileID: 2152864058861067794, guid: 9ce8ce789f0d42347b61485ad0b432bc, type: 3}
 --- !u!50 &-2937893885886629535
@@ -171,3 +172,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &3646877970362066751
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164352824471273995}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.15
