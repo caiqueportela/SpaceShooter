@@ -7,7 +7,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     [SerializeField] protected float velocidade = -3f;
 
     // Vida
-    [SerializeField] private int vida = 1;
+    [SerializeField] protected int vida = 1;
 
     // Objeto de explosão ao morrer
     [SerializeField] private GameObject explosao;

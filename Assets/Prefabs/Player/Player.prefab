@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 1311814183}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2289776368465239566}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -187,7 +187,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5887318315985968809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,8 +203,10 @@ MonoBehaviour:
   velocidade: 5
   shoot: {fileID: 5453298873202061731, guid: 1036e862393eb194dbe02d718506af5e, type: 3}
   posicaoTiro: {fileID: 2029395971}
+  velocidadeTiro: 10
   tempoTiro: 0.5
-  vida: 3
+  vida: 33
+  explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
 --- !u!61 &1311814183
 BoxCollider2D:
   m_ObjectHideFlags: 0

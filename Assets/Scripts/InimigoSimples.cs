@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InimigoSimples : BaseInimigo
 {
@@ -78,6 +80,19 @@ public class InimigoSimples : BaseInimigo
         if (other.CompareTag(Tags.Colisor))
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        // Se colidiu com o player
+        if (other.gameObject.CompareTag(Tags.Player))
+        {
+            // Tomando todaa vida de dano
+            this.TomarDano(this.vida);
+            
+            // Dando dano no player
+            other.gameObject.GetComponent<PlayerController>().TomarDano(1);
         }
     }
 }
