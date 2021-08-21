@@ -21,7 +21,7 @@ public class ShootController : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (other.TryGetComponent(out ITomaDano tomaDano))
+        if (other.TryGetComponent(out ITomaDano tomaDano) && tomaDano.PodeTomarDano())
         {
             tomaDano.TomarDano(this.danoCausado);
 

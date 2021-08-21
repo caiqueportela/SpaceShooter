@@ -43,3 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6f3f4f1ac239a4f899169e277928d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inimigos:
+  - {fileID: 5295648321180155313, guid: d880f131427319e44a930e63342d2b8d, type: 3}
+  - {fileID: 4989805822647394230, guid: 93a34ed9505c43e48ada802035199760, type: 3}
+  _level: 1
+  intervaloInimigos: 5
+  minXInimigo: -8.4
+  maxXInimigo: 8.4
+  minYInimigo: 5.8
+  maxYInimigo: 7

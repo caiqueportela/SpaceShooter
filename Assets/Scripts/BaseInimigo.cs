@@ -15,6 +15,28 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     // Velocidade do tiro
     [SerializeField] protected float velocidadeTiro = -10f;
 
+    // Pontos que ele da quando morre
+    [SerializeField] private int valePontos = 1;
+    
+    // Redenrizador da sprite
+    protected SpriteRenderer SpriteRenderer;
+
+    // Controlador do jogo
+    private GameController _gameController;
+    
+    protected virtual void Start()
+    {
+        this._gameController = FindObjectOfType<GameController>();
+        
+        // Resgatando SpriteRenderer do sprite
+        this.SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+    
+    protected bool IsVisible()
+    {
+        return this.SpriteRenderer.isVisible;
+    }
+
     public void TomarDano(int dano)
     {
         this.vida -= dano;
@@ -26,6 +48,8 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     {
         if (this.vida <= 0)
         {
+            this._gameController.GanharPontos(this.valePontos);
+            
             Destroy(this.gameObject);
 
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);
@@ -50,5 +74,10 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
         }
 
         return this.velocidadeTiro;
+    }
+
+    public bool PodeTomarDano()
+    {
+        return this.IsVisible();
     }
 }

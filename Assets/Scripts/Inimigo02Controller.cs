@@ -6,12 +6,7 @@ public class Inimigo02Controller : InimigoSimples
 
     private bool _mudouDirecao;
 
-    protected new void Start()
-    {
-        base.Start();
-    }
-
-    protected new void Update()
+    protected override void Update()
     {
         base.Update();
 

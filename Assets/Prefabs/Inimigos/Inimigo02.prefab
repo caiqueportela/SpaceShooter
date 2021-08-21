@@ -183,6 +183,7 @@ MonoBehaviour:
   vida: 2
   explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
   velocidadeTiro: -5
+  valePontos: 2
   shoot: {fileID: 9164352824471273995, guid: 91df5f1905a9e0842ad1c70d8a94be52, type: 3}
   posicaoTiro: {fileID: 5380110573487200666}
   tempoMinimoTiro: 2

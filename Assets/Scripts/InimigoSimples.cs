@@ -18,24 +18,21 @@ public class InimigoSimples : BaseInimigo
 
     // Tempo pro próximo tiro
     private float _proximoTiro;
-
-    private SpriteRenderer _spriteRenderer;
-
+    
     protected Rigidbody2D InimigoRigidbody2D;
 
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
+        
         // Resgatando o rigidbody
         this.InimigoRigidbody2D = GetComponent<Rigidbody2D>();
 
         // Definindo velocidade
         this.InimigoRigidbody2D.velocity = new Vector2(0, this.velocidade);
-
-        // Resgatando SpriteRenderer do sprite
-        this._spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         // Se estiver visivel na tela
         if (IsVisible())
@@ -67,11 +64,6 @@ public class InimigoSimples : BaseInimigo
     protected virtual void DirecionarTiro(GameObject tiro)
     {
         tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
-    }
-
-    protected bool IsVisible()
-    {
-        return this._spriteRenderer.isVisible;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

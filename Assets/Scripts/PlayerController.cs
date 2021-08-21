@@ -5,22 +5,22 @@ public class PlayerController : MonoBehaviour, ITomaDano
 {
     // Velocidade de movimento
     [SerializeField] private float velocidade = 5f;
-    
+
     // Prefab tiro
     [SerializeField] private GameObject shoot;
-    
+
     // Posicao de onde o tiro será criado
     [SerializeField] private Transform posicaoTiro;
-    
+
     // Velocidade do tiro
     [SerializeField] private float velocidadeTiro = 10f;
 
     // Tempo entre cada tiro
     [SerializeField] private float tempoTiro = 1f;
-    
+
     // Vida
     [SerializeField] private int vida = 3;
-    
+
     // Objeto de explosão ao morrer
     [SerializeField] private GameObject explosao;
 
@@ -73,14 +73,19 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
         this.Morrer();
     }
-    
+
     private void Morrer()
     {
         if (this.vida <= 0)
         {
             Destroy(this.gameObject);
-            
+
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);
         }
+    }
+
+    public bool PodeTomarDano()
+    {
+        return true;
     }
 }
