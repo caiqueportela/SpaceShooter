@@ -24,8 +24,11 @@ public class PlayerController : MonoBehaviour, ITomaDano
     // Objeto de explosão ao morrer
     [SerializeField] private GameObject explosao;
 
+    [SerializeField] private float limitesX;
+    [SerializeField] private float limitesY;
+
     // Tempo pro próximo tiro
-    private float _proximoTiro = 0f;
+    private float _proximoTiro;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -45,7 +48,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
     {
         this._proximoTiro -= Time.deltaTime;
 
-        if (this._proximoTiro < 0 && Input.GetButton("Fire1"))
+        if (this._proximoTiro <= 0 && Input.GetButton("Fire1"))
         {
             var tiro = Instantiate(this.shoot, this.posicaoTiro.position, Quaternion.identity);
 
@@ -65,6 +68,11 @@ public class PlayerController : MonoBehaviour, ITomaDano
         var velocidadeMovimento = (new Vector2(horizontal, vertical)).normalized * this.velocidade;
 
         this._rigidbody2D.velocity = velocidadeMovimento;
+
+        // Limitando saida da tela
+        var x = Mathf.Clamp(this.transform.position.x, -this.limitesX, this.limitesX);
+        var y = Mathf.Clamp(this.transform.position.y, -this.limitesY, this.limitesY);
+        this.transform.position = new Vector3(x, y, this.transform.position.z);
     }
 
     public void TomarDano(int dano)

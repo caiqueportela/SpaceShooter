@@ -29,6 +29,9 @@ public class GameController : MonoBehaviour
     // Y máximo para gerar inimigos
     [SerializeField] private float maxYInimigo = 7f;
 
+    // Quantidade de inimigos vivos na tela
+    private int _inimigosVivos;
+
     void Update()
     {
         GerarInimigos();
@@ -54,15 +57,29 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void DiminuirInimigosVivos()
+    {
+        this._inimigosVivos--;
+    }
+
     private void GerarInimigos()
     {
+        if (this._inimigosVivos > 0)
+        {
+            return;
+        }
+
         this._tempoInimigos -= Time.deltaTime;
 
         if (this._tempoInimigos <= 0)
         {
+            this._tempoInimigos = this.intervaloInimigos;
+            
             // Quanto maior o level, mais inimigos gerados
-            for (int i = 0; i <= this._level; i++)
+            for (int i = 0, maximo = (this._level * 2); i <= maximo; i++)
             {
+                this._inimigosVivos++;
+
                 var inimigo = this.inimigos[0];
 
                 var chance = Random.Range(0f, this._level);
@@ -78,8 +95,6 @@ public class GameController : MonoBehaviour
 
                 Instantiate(inimigo, position, Quaternion.identity);
             }
-
-            this._tempoInimigos = this.intervaloInimigos;
         }
     }
 }

@@ -22,11 +22,11 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     protected SpriteRenderer SpriteRenderer;
 
     // Controlador do jogo
-    private GameController _gameController;
+    protected GameController GameController;
     
     protected virtual void Start()
     {
-        this._gameController = FindObjectOfType<GameController>();
+        this.GameController = FindObjectOfType<GameController>();
         
         // Resgatando SpriteRenderer do sprite
         this.SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -48,7 +48,8 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     {
         if (this.vida <= 0)
         {
-            this._gameController.GanharPontos(this.valePontos);
+            this.GameController.GanharPontos(this.valePontos);
+            this.GameController.DiminuirInimigosVivos();
             
             Destroy(this.gameObject);
 

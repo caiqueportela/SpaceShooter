@@ -71,6 +71,8 @@ public class InimigoSimples : BaseInimigo
         // Destruindo se bater com o colisor
         if (other.CompareTag(Tags.Colisor))
         {
+            this.GameController.DiminuirInimigosVivos();
+            
             Destroy(this.gameObject);
         }
     }
@@ -80,7 +82,7 @@ public class InimigoSimples : BaseInimigo
         // Se colidiu com o player
         if (other.gameObject.CompareTag(Tags.Player))
         {
-            // Tomando todaa vida de dano
+            // Tomando toda vida de dano
             this.TomarDano(this.vida);
             
             // Dando dano no player

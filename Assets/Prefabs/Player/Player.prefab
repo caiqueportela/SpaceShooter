@@ -204,9 +204,11 @@ MonoBehaviour:
   shoot: {fileID: 5453298873202061731, guid: 1036e862393eb194dbe02d718506af5e, type: 3}
   posicaoTiro: {fileID: 2029395971}
   velocidadeTiro: 10
-  tempoTiro: 0.5
-  vida: 33
+  tempoTiro: 0.3
+  vida: 3
   explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
+  limitesX: 8.3
+  limitesY: 4.4
 --- !u!61 &1311814183
 BoxCollider2D:
   m_ObjectHideFlags: 0
