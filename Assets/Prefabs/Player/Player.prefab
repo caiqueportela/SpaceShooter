@@ -201,7 +201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 5
-  shoot: {fileID: 5453298873202061731, guid: 1036e862393eb194dbe02d718506af5e, type: 3}
+  shoots:
+  - {fileID: 5453298873202061731, guid: 1036e862393eb194dbe02d718506af5e, type: 3}
+  - {fileID: 4934646528411350650, guid: 7e3f8057dde53664db169cb038e85f96, type: 3}
   posicaoTiro: {fileID: 2029395971}
   velocidadeTiro: 10
   tempoTiro: 0.3
@@ -209,6 +211,7 @@ MonoBehaviour:
   explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
   limitesX: 8.3
   limitesY: 4.4
+  levelTiro: 1
 --- !u!61 &1311814183
 BoxCollider2D:
   m_ObjectHideFlags: 0

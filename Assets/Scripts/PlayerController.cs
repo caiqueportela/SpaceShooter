@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
     [SerializeField] private float velocidade = 5f;
 
     // Prefab tiro
-    [SerializeField] private GameObject shoot;
+    [SerializeField] private GameObject[] shoots;
 
     // Posicao de onde o tiro será criado
     [SerializeField] private Transform posicaoTiro;
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
     [SerializeField] private float limitesX;
     [SerializeField] private float limitesY;
+
+    [SerializeField] private int levelTiro = 1;
 
     // Tempo pro próximo tiro
     private float _proximoTiro;
@@ -50,12 +53,36 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
         if (this._proximoTiro <= 0 && Input.GetButton("Fire1"))
         {
-            var tiro = Instantiate(this.shoot, this.posicaoTiro.position, Quaternion.identity);
-
-            tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
+            switch (this.levelTiro)
+            {
+                case 2:
+                    this.CriarTiro(this.shoots[1], 0.3f, -0.3f);
+                    this.CriarTiro(this.shoots[1], -0.3f, -0.3f);
+                    break;
+                case 3:
+                    this.CriarTiro(this.shoots[0]);
+                    this.CriarTiro(this.shoots[1], 0.3f, -0.3f);
+                    this.CriarTiro(this.shoots[1], -0.3f, -0.3f);
+                    break;
+                default:
+                    this.CriarTiro(this.shoots[0]);
+                    break;
+            }
 
             this._proximoTiro = this.tempoTiro;
         }
+    }
+
+    private void CriarTiro(GameObject objetoTiro, float x = 0, float y = 0)
+    {
+        var posicao = this.posicaoTiro.position;
+
+        posicao.x += x;
+        posicao.y += y;
+
+        var tiro = Instantiate(objetoTiro, posicao, Quaternion.identity);
+        
+        tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
     }
 
     private void Movimentar()
