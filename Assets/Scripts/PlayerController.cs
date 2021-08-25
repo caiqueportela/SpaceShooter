@@ -131,10 +131,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
     {
         if (other.CompareTag(Tags.PowerUp))
         {
-            Debug.Log("PowerUp");
             if (this._maximoLevelTiro > this.levelTiro)
             {
-                Debug.Log("subindo");
                 this.levelTiro++;
             }
             

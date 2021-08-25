@@ -78,8 +78,6 @@ public class GameController : MonoBehaviour
             // Quanto maior o level, mais inimigos gerados
             for (int i = 0, maximo = (this._level * 2); i <= maximo; i++)
             {
-                this._inimigosVivos++;
-
                 var inimigo = this.inimigos[0];
 
                 var chance = Random.Range(0f, this._level);
@@ -89,12 +87,35 @@ public class GameController : MonoBehaviour
                     inimigo = this.inimigos[1];
                 }
 
-                var posX = Random.Range(this.minXInimigo, this.maxXInimigo);
-                var posY = Random.Range(this.minYInimigo, this.maxYInimigo);
-                var position = new Vector3(posX, posY, this.transform.position.z);
+                var position = this.CalcularPosicao(inimigo.transform.localScale);
 
                 Instantiate(inimigo, position, Quaternion.identity);
+                
+                this._inimigosVivos++;
             }
         }
+    }
+
+    private Vector2 CalcularPosicao(Vector3 tamanhoInimigo)
+    {
+        Collider2D hit;
+        Vector2 position;
+        var tentativas = 0;
+
+        do
+        {
+            tentativas++;
+            
+            var posX = Random.Range(this.minXInimigo, this.maxXInimigo);
+            var posY = Random.Range(this.minYInimigo, this.maxYInimigo);
+            position = new Vector2(posX, posY);
+
+            // Verificando se na posição gerada existe algum colisor
+            hit = Physics2D.OverlapBox(position, tamanhoInimigo, 0f);
+        } while (hit && tentativas <= 200);
+        
+
+        // Caso seja null, a posição está live
+        return position;
     }
 }
