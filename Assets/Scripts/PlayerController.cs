@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
     [SerializeField] private float limitesY;
 
     [SerializeField] private int levelTiro = 1;
+
+    private int _maximoLevelTiro = 3;
 
     // Tempo pro próximo tiro
     private float _proximoTiro;
@@ -122,5 +125,20 @@ public class PlayerController : MonoBehaviour, ITomaDano
     public bool PodeTomarDano()
     {
         return true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag(Tags.PowerUp))
+        {
+            Debug.Log("PowerUp");
+            if (this._maximoLevelTiro > this.levelTiro)
+            {
+                Debug.Log("subindo");
+                this.levelTiro++;
+            }
+            
+            Destroy(other.gameObject);
+        }
     }
 }

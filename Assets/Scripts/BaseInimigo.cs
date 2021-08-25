@@ -18,6 +18,9 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     // Pontos que ele da quando morre
     [SerializeField] private int valePontos = 1;
     
+    // Prefab powerup
+    [SerializeField] private GameObject powerUpPrefab;
+    
     // Redenrizador da sprite
     protected SpriteRenderer SpriteRenderer;
 
@@ -54,7 +57,28 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
             Destroy(this.gameObject);
 
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);
+
+            CriarPowerUp();
         }
+    }
+
+    private void CriarPowerUp()
+    {
+        float chance = Random.Range(0f, 1f);
+
+        if (chance <= .9f)
+        {
+            return;
+        }
+        
+        var powerUp = Instantiate(this.powerUpPrefab, this.transform.position, Quaternion.identity);
+
+        Destroy(powerUp.gameObject, 3f);
+
+        var rb = powerUp.GetComponent<Rigidbody2D>();
+
+        var direcao = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        rb.velocity = direcao;
     }
 
     protected float GetVelocidade(bool normalized = false)
