@@ -71,8 +71,6 @@ public class InimigoSimples : BaseInimigo
         // Destruindo se bater com o colisor
         if (other.CompareTag(Tags.Colisor))
         {
-            this.GameController.DiminuirInimigosVivos();
-            
             Destroy(this.gameObject);
         }
     }

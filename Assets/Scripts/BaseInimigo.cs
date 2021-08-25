@@ -52,7 +52,6 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
         if (this.vida <= 0)
         {
             this.GameController.GanharPontos(this.valePontos);
-            this.GameController.DiminuirInimigosVivos();
             
             Destroy(this.gameObject);
 
@@ -104,5 +103,15 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     public bool PodeTomarDano()
     {
         return this.IsVisible();
+    }
+    
+    private void OnDestroy()
+    {
+        if (!this.GameController)
+        {
+            return;
+        }
+        
+        this.GameController.DiminuirInimigosVivos();
     }
 }
