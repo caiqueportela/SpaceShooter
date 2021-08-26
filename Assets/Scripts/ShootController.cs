@@ -9,10 +9,6 @@ public class ShootController : MonoBehaviour
     // Objeto de impacto do tiro
     [SerializeField] private GameObject impactoTiro;
 
-    void Start()
-    {
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Destruindo se bater com o colisor
@@ -25,6 +21,11 @@ public class ShootController : MonoBehaviour
         {
             tomaDano.TomarDano(this.danoCausado);
 
+            this.Destruir();
+        }
+        
+        if (other.CompareTag(Tags.Escudo))
+        {
             this.Destruir();
         }
     }

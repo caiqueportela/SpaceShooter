@@ -9,6 +9,7 @@ TagManager:
   - Colisor
   - Limites
   - PowerUp
+  - Escudo
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - PlayerShoot
   - InimigoShoot
   - Limites tela
-  - 
+  - Escudo
   - 
   - 
   - 
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 495731791
+    locked: 0
+  - name: Escudo
+    uniqueID: 4034619473
     locked: 0

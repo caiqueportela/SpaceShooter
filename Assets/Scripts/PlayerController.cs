@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, ITomaDano
 {
+    // Quantidade maxima de escudos que o player pode utilizar
+    private const int MAX_ESCUDOS = 3;
+    
     // Velocidade de movimento
     [SerializeField] private float velocidade = 5f;
 
@@ -31,6 +34,27 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
     [SerializeField] private int levelTiro = 1;
 
+    // Prefab do escudo
+    [SerializeField] private GameObject escudoPrefab;
+
+    // Tempo entre poder criar um novo escudo
+    [SerializeField] private float intervaloEscudo = 10f;
+
+    // Tempo que dura o escudo
+    [SerializeField] private float tempoEscudo = 5f;
+
+    // Quantidade de escudos que o player já utilizou
+    private int _escudosUtilizados;
+    
+    // Tempo até o proximo escudo
+    private float _proximoEscudo;
+
+    // Tempo até o termino do escudo
+    private float _terminoEscudo;
+
+    // Instancia do escudo criada
+    private GameObject _escudo;
+
     private int _maximoLevelTiro = 3;
 
     // Tempo pro próximo tiro
@@ -48,6 +72,36 @@ public class PlayerController : MonoBehaviour, ITomaDano
         this.Movimentar();
 
         this.Atirar();
+
+        this.Escudo();
+    }
+
+    private void Escudo()
+    {
+        this._proximoEscudo -= Time.deltaTime;
+        
+        if (this._escudo)
+        {
+            this._terminoEscudo -= Time.deltaTime;
+            this._escudo.transform.position = this.transform.position;
+
+            if (this._terminoEscudo <= 0)
+            {
+                Destroy(this._escudo.gameObject);
+                this._escudo = null;
+            }
+            
+            return;
+        }
+
+        if (this._proximoEscudo <= 0 && Input.GetButtonDown("Shield") && this._escudosUtilizados < MAX_ESCUDOS)
+        {
+            this._escudo = Instantiate(this.escudoPrefab, this.transform.position, Quaternion.identity);
+            this._escudosUtilizados++;
+            
+            this._terminoEscudo = this.tempoEscudo;
+            this._proximoEscudo = this.intervaloEscudo;
+        }
     }
 
     private void Atirar()

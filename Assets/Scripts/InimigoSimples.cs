@@ -73,6 +73,13 @@ public class InimigoSimples : BaseInimigo
         {
             Destroy(this.gameObject);
         }
+        
+        // Destruindo se bater no escudo
+        if (other.CompareTag(Tags.Escudo))
+        {
+            // Tomando toda vida de dano
+            this.TomarDano(this.vida);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -85,6 +92,13 @@ public class InimigoSimples : BaseInimigo
             
             // Dando dano no player
             other.gameObject.GetComponent<PlayerController>().TomarDano(1);
+        }
+        
+        // Se colidiu com o escudo
+        if (other.gameObject.CompareTag(Tags.Escudo))
+        {
+            // Tomando toda vida de dano
+            this.TomarDano(this.vida);
         }
     }
 }
