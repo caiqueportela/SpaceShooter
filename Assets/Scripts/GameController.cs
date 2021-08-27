@@ -6,10 +6,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject[] inimigos;
 
     // Pontos do jogador
-    private int _pontos;
+    [SerializeField] private int _pontos;
 
     // Level atual do jogador
-    private int _level = 1;
+    [SerializeField] private int _level = 1;
 
     // Tempo até a geração do próximo inimigo
     private float _tempoInimigos = 0f;
@@ -29,12 +29,53 @@ public class GameController : MonoBehaviour
     // Y máximo para gerar inimigos
     [SerializeField] private float maxYInimigo = 7f;
 
+    // Level que o voss vai iniciar
+    private int _levelBoss = 5;
+
+    // Prefab da animação de entrada do boss
+    [SerializeField] private GameObject prefabBossAnimacao;
+
+    // Boss já foi criado?
+    private bool _bossCriado;
+
     // Quantidade de inimigos vivos na tela
     private int _inimigosVivos;
 
     void Update()
     {
+        if (this._level >= this._levelBoss)
+        {
+            this.GerarBoss();
+            return;
+        }
+
         GerarInimigos();
+    }
+
+    private void GerarBoss()
+    {
+        if (this._bossCriado) return;
+        
+        if (this._inimigosVivos > 0)
+        {
+            this._tempoInimigos = this.intervaloInimigos;
+            return;
+        }
+        
+        this._tempoInimigos -= Time.deltaTime;
+
+        if (this._tempoInimigos > 0)
+        {
+            return;
+        }
+        
+        var posicao = new Vector2(0f, -8f);
+
+        var bossAnimacao = Instantiate(this.prefabBossAnimacao, posicao, Quaternion.identity);
+
+        Destroy(bossAnimacao.gameObject, 8f);
+
+        this._bossCriado = true;
     }
 
     public void GanharPontos(int pontos)
@@ -74,7 +115,7 @@ public class GameController : MonoBehaviour
         if (this._tempoInimigos <= 0)
         {
             this._tempoInimigos = this.intervaloInimigos;
-            
+
             // Quanto maior o level, mais inimigos gerados
             for (int i = 0, maximo = (this._level * 2); i <= maximo; i++)
             {
@@ -90,7 +131,7 @@ public class GameController : MonoBehaviour
                 var position = this.CalcularPosicao(inimigo.transform.localScale);
 
                 Instantiate(inimigo, position, Quaternion.identity);
-                
+
                 this._inimigosVivos++;
             }
         }
@@ -105,7 +146,7 @@ public class GameController : MonoBehaviour
         do
         {
             tentativas++;
-            
+
             var posX = Random.Range(this.minXInimigo, this.maxXInimigo);
             var posY = Random.Range(this.minYInimigo, this.maxYInimigo);
             position = new Vector2(posX, posY);
@@ -113,7 +154,7 @@ public class GameController : MonoBehaviour
             // Verificando se na posição gerada existe algum colisor
             hit = Physics2D.OverlapBox(position, tamanhoInimigo, 0f);
         } while (hit && tentativas <= 200);
-        
+
 
         // Caso seja null, a posição está live
         return position;

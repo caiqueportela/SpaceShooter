@@ -560,6 +560,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 5926412356422673626, guid: d30ab819e62375147b754f9ffb9b72aa, type: 3}
+      propertyPath: prefabBossAnimacao
+      value: 
+      objectReference: {fileID: 2547101799113904736, guid: 0c0c85728ad3faf4185ad16756ac1771, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d30ab819e62375147b754f9ffb9b72aa, type: 3}
 --- !u!1001 &1914903032741910639
@@ -579,11 +583,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8679115587215108664, guid: 0c13b53a5ce0dd14ba4e14dd2f8d1aed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.43
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 8679115587215108664, guid: 0c13b53a5ce0dd14ba4e14dd2f8d1aed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.63
+      value: -3.26
       objectReference: {fileID: 0}
     - target: {fileID: 8679115587215108664, guid: 0c13b53a5ce0dd14ba4e14dd2f8d1aed, type: 3}
       propertyPath: m_LocalPosition.z
