@@ -17,7 +17,7 @@ public class Inimigo02Controller : InimigoSimples
             var direcaoX = this.transform.position.x > 0 ? -1 : 1;
 
             // Definindo a nova velocidade/direção
-            this.InimigoRigidbody2D.velocity = (new Vector2(direcaoX, -1)).normalized * this.GetVelocidade(true);
+            this.Rigidbody2D.velocity = (new Vector2(direcaoX, -1)).normalized * this.GetVelocidade(true);
 
             this._mudouDirecao = true;
         }

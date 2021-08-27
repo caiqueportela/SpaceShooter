@@ -1,5 +1,7 @@
+using System;
 using Interfaces;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 {
@@ -17,24 +19,42 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
     // Pontos que ele da quando morre
     [SerializeField] private int valePontos = 1;
-    
+
     // Prefab powerup
     [SerializeField] private GameObject powerUpPrefab;
-    
+
     // Redenrizador da sprite
     protected SpriteRenderer SpriteRenderer;
 
     // Controlador do jogo
     protected GameController GameController;
-    
+
+    // Tempo pro próximo tiro
+    protected float ProximoTiro;
+
+    protected Rigidbody2D Rigidbody2D;
+
     protected virtual void Start()
     {
         this.GameController = FindObjectOfType<GameController>();
-        
+
         // Resgatando SpriteRenderer do sprite
         this.SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        // Resgatando o rigidbody
+        this.Rigidbody2D = GetComponent<Rigidbody2D>();
     }
-    
+
+    protected virtual void Update()
+    {
+        // Se estiver visivel na tela
+        if (IsVisible())
+        {
+            // Diminuindo tempo pro proximo tiro
+            this.ProximoTiro -= Time.deltaTime;
+        }
+    }
+
     protected bool IsVisible()
     {
         return this.SpriteRenderer.isVisible;
@@ -52,7 +72,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
         if (this.vida <= 0)
         {
             this.GameController.GanharPontos(this.valePontos);
-            
+
             Destroy(this.gameObject);
 
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);
@@ -69,7 +89,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
         {
             return;
         }
-        
+
         var powerUp = Instantiate(this.powerUpPrefab, this.transform.position, Quaternion.identity);
 
         Destroy(powerUp.gameObject, 3f);
@@ -104,14 +124,24 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     {
         return this.IsVisible();
     }
-    
+
+    protected virtual void DirecionarTiro(GameObject tiro)
+    {
+        tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
+    }
+
+    protected bool PodeAtirar()
+    {
+        return this.ProximoTiro <= 0;
+    }
+
     private void OnDestroy()
     {
         if (!this.GameController)
         {
             return;
         }
-        
+
         this.GameController.DiminuirInimigosVivos();
     }
 }
