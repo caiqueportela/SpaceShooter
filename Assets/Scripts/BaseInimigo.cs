@@ -24,10 +24,10 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     [SerializeField] private GameObject powerUpPrefab;
 
     // Redenrizador da sprite
-    protected SpriteRenderer SpriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     // Controlador do jogo
-    protected GameController GameController;
+    private GameController _gameController;
 
     // Tempo pro próximo tiro
     protected float ProximoTiro;
@@ -36,10 +36,10 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
     protected virtual void Start()
     {
-        this.GameController = FindObjectOfType<GameController>();
+        this._gameController = FindObjectOfType<GameController>();
 
         // Resgatando SpriteRenderer do sprite
-        this.SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        this._spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         // Resgatando o rigidbody
         this.Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -57,7 +57,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
     protected bool IsVisible()
     {
-        return this.SpriteRenderer.isVisible;
+        return this._spriteRenderer.isVisible;
     }
 
     public void TomarDano(int dano)
@@ -67,11 +67,11 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
         this.Morrer();
     }
 
-    private void Morrer()
+    protected virtual void Morrer()
     {
         if (this.vida <= 0)
         {
-            this.GameController.GanharPontos(this.valePontos);
+            this._gameController.GanharPontos(this.valePontos);
 
             Destroy(this.gameObject);
 
@@ -137,11 +137,11 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
     private void OnDestroy()
     {
-        if (!this.GameController)
+        if (!this._gameController)
         {
             return;
         }
 
-        this.GameController.DiminuirInimigosVivos();
+        this._gameController.DiminuirInimigosVivos();
     }
 }

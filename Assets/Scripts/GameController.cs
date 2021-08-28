@@ -55,20 +55,20 @@ public class GameController : MonoBehaviour
     private void GerarBoss()
     {
         if (this._bossCriado) return;
-        
+
         if (this._inimigosVivos > 0)
         {
             this._tempoInimigos = this.intervaloInimigos;
             return;
         }
-        
+
         this._tempoInimigos -= Time.deltaTime;
 
         if (this._tempoInimigos > 0)
         {
             return;
         }
-        
+
         var posicao = new Vector2(0f, -8f);
 
         var bossAnimacao = Instantiate(this.prefabBossAnimacao, posicao, Quaternion.identity);
@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
 
     public void GanharPontos(int pontos)
     {
-        if (this._level >= 5)
+        if (this._level >= 3)
         {
             pontos *= 2;
         }

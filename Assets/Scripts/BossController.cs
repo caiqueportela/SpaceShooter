@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,36 +9,39 @@ public class BossController : BaseInimigo
     [SerializeField] private float minX;
 
     [SerializeField] private float maxX;
-    
+
     [Header("Prefabs")]
     // Prefab tiro 2
-    [SerializeField] private GameObject prefabTiro1;
-    
+    [SerializeField]
+    private GameObject prefabTiro1;
+
     // Prefab tiro
     [SerializeField] private GameObject prefabTiro2;
-    
+
     [Header("Posições")]
     // Posições do tiro 1
-    [SerializeField] private Transform[] posicaoTiro1;
-    
+    [SerializeField]
+    private Transform[] posicaoTiro1;
+
     // Porição do tiro 2
     [SerializeField] private Transform posicaoTiro2;
 
     // Tempo entre os tiros dependendo do estado
     [SerializeField] private SerializableDictionary<BossState, float> tempoEsperaTiro;
-    
+
     // Tempo pro próximo tiro 2 do estado 3
     private float _proximoTiro2;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
+    [SerializeField] private float tempoEstado = 10f;
+
+    private float _proximoEstado;
+
+    [SerializeField] private GameObject prefabMorte;
 
     protected override void Update()
     {
         base.Update();
-        
+
         switch (this.state)
         {
             case BossState.Modo1:
@@ -50,16 +54,18 @@ public class BossController : BaseInimigo
                 Mode3();
                 break;
         }
+
+        this.TrocarEstado();
     }
 
     private void Mode3()
     {
         this.Movimentar();
-        
+
         if (this.PodeAtirar())
         {
             this.DispararTiro1();
-            
+
             // Define tempo do próximo tiro
             this.ProximoTiro = this.tempoEsperaTiro[this.state];
         }
@@ -67,7 +73,7 @@ public class BossController : BaseInimigo
         if (this._proximoTiro2 <= 0)
         {
             this.DispararTiro2();
-            
+
             var proximoTiro = this.tempoEsperaTiro[this.state];
             this._proximoTiro2 = Random.Range(proximoTiro - 1, proximoTiro + 1);
         }
@@ -80,11 +86,11 @@ public class BossController : BaseInimigo
     private void Modo2()
     {
         this.Rigidbody2D.velocity = Vector2.zero;
-        
+
         if (this.PodeAtirar())
         {
             this.DispararTiro2();
-            
+
             // Define tempo do próximo tiro
             this.ProximoTiro = this.tempoEsperaTiro[this.state];
         }
@@ -97,7 +103,7 @@ public class BossController : BaseInimigo
         if (this.PodeAtirar())
         {
             this.DispararTiro1();
-            
+
             // Define tempo do próximo tiro
             this.ProximoTiro = this.tempoEsperaTiro[this.state];
         }
@@ -125,15 +131,15 @@ public class BossController : BaseInimigo
     {
         var tiro1 = Instantiate(this.prefabTiro1, this.posicaoTiro1[0].position, Quaternion.identity);
         this.DirecionarTiro(tiro1);
-        
+
         var tiro2 = Instantiate(this.prefabTiro1, this.posicaoTiro1[1].position, Quaternion.identity);
         this.DirecionarTiro(tiro2);
     }
-    
+
     private void DispararTiro2()
     {
         var tiro = Instantiate(this.prefabTiro2, this.posicaoTiro2.position, Quaternion.identity);
-        
+
         // Encontrando o player na cena
         var player = FindObjectOfType<PlayerController>();
 
@@ -161,5 +167,35 @@ public class BossController : BaseInimigo
     private int RandomSign()
     {
         return Random.value < 0.5f ? 1 : -1;
+    }
+
+    private void TrocarEstado()
+    {
+        this._proximoEstado -= Time.deltaTime;
+
+        if (this._proximoEstado > 0)
+        {
+            return;
+        }
+
+        var stateValues = Enum.GetValues(typeof(BossState));
+        var nextState = Random.Range(0, stateValues.Length);
+
+        this.state = (BossState)nextState;
+
+        this._proximoEstado = this.tempoEstado;
+    }
+
+    protected override void Morrer()
+    {
+        if (this.vida > 0)
+        {
+            return;
+        }
+        
+        var bossMorte = Instantiate(this.prefabMorte, this.transform.position, Quaternion.identity);
+        Destroy(bossMorte.gameObject, 8f);
+        
+        Destroy(this.gameObject);
     }
 }

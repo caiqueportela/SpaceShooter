@@ -241,10 +241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd533187a41bf646a72662d4f0d648c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidade: 3
-  vida: 100
+  velocidade: 2
+  vida: 250
   explosao: {fileID: 226261750759418464, guid: a762b90b8f75eaf4d878bd229cc52f4a, type: 3}
-  velocidadeTiro: -10
+  velocidadeTiro: -8
   valePontos: 999
   powerUpPrefab: {fileID: 0}
   state: 0
@@ -256,6 +256,16 @@ MonoBehaviour:
   - {fileID: 1424479341}
   - {fileID: 1498225096}
   posicaoTiro2: {fileID: 928107276}
+  tempoEsperaTiro:
+    array:
+    - Key: 0
+      Value: 2
+    - Key: 1
+      Value: 1
+    - Key: 2
+      Value: 1
+  tempoEstado: 10
+  prefabMorte: {fileID: 980678655039315409, guid: 252001a04c8123d4fb73cfef5a71aef5, type: 3}
 --- !u!50 &658306004
 Rigidbody2D:
   serializedVersion: 4
