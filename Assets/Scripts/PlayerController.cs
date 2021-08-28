@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, ITomaDano
 {
@@ -62,9 +63,28 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
     private Rigidbody2D _rigidbody2D;
 
+    [SerializeField] private Text txtVida;
+    [SerializeField] private Text txtEscudo;
+    [SerializeField] private Text txtEscudoTempo;
+
     void Start()
     {
         this._rigidbody2D = GetComponent<Rigidbody2D>();
+
+        this.AtualizarVidaUI();
+        this.AtualizarEscudoUI();
+    }
+
+    private void AtualizarVidaUI()
+    {
+        this.txtVida.text = $"{this.vida}";
+    }
+    
+    private void AtualizarEscudoUI()
+    {
+        this.txtEscudo.text = $"{(MAX_ESCUDOS - this._escudosUtilizados)}";
+        var tempo = this._proximoEscudo > 0 ? this._proximoEscudo : 0;
+        this.txtEscudoTempo.text = $"{tempo.ToString("0")} s";
     }
 
     void Update()
@@ -78,6 +98,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
     private void Escudo()
     {
+        this.AtualizarEscudoUI();
+        
         this._proximoEscudo -= Time.deltaTime;
         
         if (this._escudo)
@@ -162,6 +184,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
     public void TomarDano(int dano)
     {
         this.vida -= dano;
+
+        this.AtualizarVidaUI();
 
         this.Morrer();
     }

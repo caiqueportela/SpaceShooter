@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BossController : BaseInimigo
@@ -37,6 +38,18 @@ public class BossController : BaseInimigo
     private float _proximoEstado;
 
     [SerializeField] private GameObject prefabMorte;
+
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private Image imgVida;
+
+    private int _vidaOriginal;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        this._vidaOriginal = this.vida;
+    }
 
     protected override void Update()
     {
@@ -138,8 +151,7 @@ public class BossController : BaseInimigo
 
     private void DispararTiro2()
     {
-        var tiro = Instantiate(this.prefabTiro2, this.posicaoTiro2.position, Quaternion.identity);
-
+        
         // Encontrando o player na cena
         var player = FindObjectOfType<PlayerController>();
 
@@ -147,6 +159,8 @@ public class BossController : BaseInimigo
         {
             return;
         }
+        
+        var tiro = Instantiate(this.prefabTiro2, this.posicaoTiro2.position, Quaternion.identity);
 
         // Calculando a direção
         var direcao = player.transform.position - tiro.transform.position;
@@ -192,10 +206,27 @@ public class BossController : BaseInimigo
         {
             return;
         }
+
+        this.canvas.enabled = false;
+        
+        this.GameController.GanharPontos(this.valePontos);
         
         var bossMorte = Instantiate(this.prefabMorte, this.transform.position, Quaternion.identity);
         Destroy(bossMorte.gameObject, 8f);
         
         Destroy(this.gameObject);
+    }
+
+    public override void TomarDano(int dano)
+    {
+        base.TomarDano(dano);
+        
+        this.imgVida.fillAmount = (1f / this._vidaOriginal) * this.vida;
+        var alpha = (255 * this.imgVida.fillAmount);
+        if (alpha <= 150)
+        {
+            alpha += 100;
+        }
+        this.imgVida.color = new Color32(255, 0, 0, (byte)alpha);
     }
 }

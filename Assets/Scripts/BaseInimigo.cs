@@ -18,7 +18,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     [SerializeField] protected float velocidadeTiro = -10f;
 
     // Pontos que ele da quando morre
-    [SerializeField] private int valePontos = 1;
+    [SerializeField] protected int valePontos = 1;
 
     // Prefab powerup
     [SerializeField] private GameObject powerUpPrefab;
@@ -27,7 +27,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     private SpriteRenderer _spriteRenderer;
 
     // Controlador do jogo
-    private GameController _gameController;
+    protected GameController GameController;
 
     // Tempo pro próximo tiro
     protected float ProximoTiro;
@@ -36,7 +36,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
     protected virtual void Start()
     {
-        this._gameController = FindObjectOfType<GameController>();
+        this.GameController = FindObjectOfType<GameController>();
 
         // Resgatando SpriteRenderer do sprite
         this._spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -60,7 +60,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
         return this._spriteRenderer.isVisible;
     }
 
-    public void TomarDano(int dano)
+    public virtual void TomarDano(int dano)
     {
         this.vida -= dano;
 
@@ -71,7 +71,7 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     {
         if (this.vida <= 0)
         {
-            this._gameController.GanharPontos(this.valePontos);
+            this.GameController.GanharPontos(this.valePontos);
 
             Destroy(this.gameObject);
 
@@ -137,11 +137,11 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
 
     private void OnDestroy()
     {
-        if (!this._gameController)
+        if (!this.GameController)
         {
             return;
         }
 
-        this._gameController.DiminuirInimigosVivos();
+        this.GameController.DiminuirInimigosVivos();
     }
 }

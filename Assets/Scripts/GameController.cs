@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class GameController : MonoBehaviour
     // Quantidade de inimigos vivos na tela
     private int _inimigosVivos;
 
+    [SerializeField] private Text txtPontos;
+
     void Update()
     {
         if (this._level >= this._levelBoss)
@@ -50,6 +53,13 @@ public class GameController : MonoBehaviour
         }
 
         GerarInimigos();
+
+        this.AtualizarUIPontos();
+    }
+
+    private void AtualizarUIPontos()
+    {
+        this.txtPontos.text = $"{this._pontos}";
     }
 
     private void GerarBoss()
@@ -80,12 +90,9 @@ public class GameController : MonoBehaviour
 
     public void GanharPontos(int pontos)
     {
-        if (this._level >= 3)
-        {
-            pontos *= 2;
-        }
-
         this._pontos += pontos;
+
+        this.AtualizarUIPontos();
 
         this.ChecarLevel();
     }

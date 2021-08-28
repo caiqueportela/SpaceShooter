@@ -215,6 +215,9 @@ MonoBehaviour:
   escudoPrefab: {fileID: 5354257477018695567, guid: 66d17cf41e5aa7145a91a9529d09ffd5, type: 3}
   intervaloEscudo: 10
   tempoEscudo: 5
+  txtVida: {fileID: 0}
+  txtEscudo: {fileID: 0}
+  txtEscudoTempo: {fileID: 0}
 --- !u!70 &3004011362930036774
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

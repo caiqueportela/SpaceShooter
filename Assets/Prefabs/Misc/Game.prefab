@@ -46,9 +46,12 @@ MonoBehaviour:
   inimigos:
   - {fileID: 5295648321180155313, guid: d880f131427319e44a930e63342d2b8d, type: 3}
   - {fileID: 4989805822647394230, guid: 93a34ed9505c43e48ada802035199760, type: 3}
+  _pontos: 0
   _level: 1
   intervaloInimigos: 5
   minXInimigo: -8.4
   maxXInimigo: 8.4
   minYInimigo: 5.8
   maxYInimigo: 7
+  prefabBossAnimacao: {fileID: 2547101799113904736, guid: 0c0c85728ad3faf4185ad16756ac1771, type: 3}
+  txtPontos: {fileID: 0}

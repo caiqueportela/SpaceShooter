@@ -30,6 +30,7 @@ public class Inimigo02Controller : InimigoSimples
 
         if (!player)
         {
+            Destroy(tiro.gameObject);
             return;
         }
 
