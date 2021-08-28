@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossMorteSpriteController : MonoBehaviour
 {
@@ -12,5 +13,14 @@ public class BossMorteSpriteController : MonoBehaviour
         var position = new Vector2(x, y);
 
         Instantiate(this.explosao, position, Quaternion.identity);
+    }
+
+    public void Reiniciar()
+    {
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager)
+        {
+            gameManager.Reiniciar();
+        }
     }
 }

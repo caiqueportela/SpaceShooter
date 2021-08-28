@@ -49,6 +49,8 @@ public class BossController : BaseInimigo
         base.Start();
 
         this._vidaOriginal = this.vida;
+
+        GetComponentInChildren<Canvas>().worldCamera = Camera.main;
     }
 
     protected override void Update()
