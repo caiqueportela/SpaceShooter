@@ -575,6 +575,7 @@ MonoBehaviour:
   velocidadeTiro: -8
   valePontos: 999
   powerUpPrefab: {fileID: 0}
+  tiroSom: {fileID: 8300000, guid: 0c5bc79b690df884699f933cd94dc948, type: 3}
   state: 0
   minX: -6
   maxX: 6

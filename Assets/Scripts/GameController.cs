@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
@@ -44,6 +46,15 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private Text txtPontos;
 
+    [SerializeField] private AudioClip bossSom;
+
+    private AudioSource _audioSource;
+
+    private void Start()
+    {
+        this._audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (this._level >= this._levelBoss)
@@ -78,6 +89,9 @@ public class GameController : MonoBehaviour
         {
             return;
         }
+
+        this._audioSource.clip = this.bossSom;
+        this._audioSource.Play();
 
         var posicao = new Vector2(0f, -8f);
 

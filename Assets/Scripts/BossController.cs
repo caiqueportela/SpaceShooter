@@ -143,9 +143,11 @@ public class BossController : BaseInimigo
     private void DispararTiro1()
     {
         var tiro1 = Instantiate(this.prefabTiro1, this.posicaoTiro1[0].position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(this.tiroSom, Vector3.zero);
         this.DirecionarTiro(tiro1);
 
         var tiro2 = Instantiate(this.prefabTiro1, this.posicaoTiro1[1].position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(this.tiroSom, Vector3.zero);
         this.DirecionarTiro(tiro2);
     }
 
@@ -161,6 +163,7 @@ public class BossController : BaseInimigo
         }
         
         var tiro = Instantiate(this.prefabTiro2, this.posicaoTiro2.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(this.tiroSom, Vector3.zero);
 
         // Calculando a direção
         var direcao = player.transform.position - tiro.transform.position;

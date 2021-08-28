@@ -710,10 +710,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
-    - target: {fileID: 1702693021703115578, guid: d30ab819e62375147b754f9ffb9b72aa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5926412356422673626, guid: d30ab819e62375147b754f9ffb9b72aa, type: 3}
       propertyPath: txtPontos
       value: 

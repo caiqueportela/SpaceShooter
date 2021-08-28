@@ -45,6 +45,8 @@ public class InimigoSimples : BaseInimigo
 
         // Cria o tiro
         var tiro = Instantiate(this.shoot, this.posicaoTiro.position, Quaternion.identity);
+        
+        AudioSource.PlayClipAtPoint(this.tiroSom, Vector3.zero);
 
         this.DirecionarTiro(tiro);
 

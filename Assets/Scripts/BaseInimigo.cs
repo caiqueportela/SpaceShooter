@@ -33,6 +33,8 @@ public abstract class BaseInimigo : MonoBehaviour, ITomaDano
     protected float ProximoTiro;
 
     protected Rigidbody2D Rigidbody2D;
+    
+    [SerializeField] protected AudioClip tiroSom;
 
     protected virtual void Start()
     {

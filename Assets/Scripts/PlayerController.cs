@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour, ITomaDano
     [SerializeField] private Text txtEscudo;
     [SerializeField] private Text txtEscudoTempo;
 
+    [SerializeField] private AudioClip tiroSom;
+    [SerializeField] private AudioClip morteSom;
+    [SerializeField] private AudioClip escudoSom;
+    [SerializeField] private AudioClip escudoSaindoSom;
+
     void Start()
     {
         this._rigidbody2D = GetComponent<Rigidbody2D>();
@@ -107,6 +112,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
             if (this._terminoEscudo <= 0)
             {
+                AudioSource.PlayClipAtPoint(this.escudoSaindoSom, Vector3.zero);
                 Destroy(this._escudo.gameObject);
                 this._escudo = null;
             }
@@ -118,6 +124,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
         {
             this._escudo = Instantiate(this.escudoPrefab, this.transform.position, Quaternion.identity);
             this._escudosUtilizados++;
+            
+            AudioSource.PlayClipAtPoint(this.escudoSom, Vector3.zero);
 
             this._terminoEscudo = this.tempoEscudo;
             this._proximoEscudo = this.intervaloEscudo;
@@ -160,6 +168,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
         var tiro = Instantiate(objetoTiro, posicao, Quaternion.identity);
 
         tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
+        
+        AudioSource.PlayClipAtPoint(this.tiroSom, Vector3.zero);
     }
 
     private void Movimentar()
@@ -192,6 +202,8 @@ public class PlayerController : MonoBehaviour, ITomaDano
     {
         if (this.vida <= 0)
         {
+            AudioSource.PlayClipAtPoint(this.morteSom, Vector3.zero);
+            
             Destroy(this.gameObject);
 
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);

@@ -189,6 +189,7 @@ MonoBehaviour:
   posicaoTiro: {fileID: 5380110573487200666}
   tempoMinimoTiro: 2
   tempoMaximoTiro: 3
+  tiroSom: {fileID: 8300000, guid: 0c5bc79b690df884699f933cd94dc948, type: 3}
   inicioMudarMovimentacaoY: 3
 --- !u!70 &12749200
 CapsuleCollider2D:

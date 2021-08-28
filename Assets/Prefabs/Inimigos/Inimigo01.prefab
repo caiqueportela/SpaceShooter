@@ -124,6 +124,7 @@ MonoBehaviour:
   posicaoTiro: {fileID: 5295648321922557825}
   tempoMinimoTiro: 1.5
   tempoMaximoTiro: 2.5
+  tiroSom: {fileID: 8300000, guid: 0c5bc79b690df884699f933cd94dc948, type: 3}
 --- !u!1 &5295648321922557824
 GameObject:
   m_ObjectHideFlags: 0
