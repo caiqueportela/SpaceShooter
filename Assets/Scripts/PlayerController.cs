@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +6,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
 {
     // Quantidade maxima de escudos que o player pode utilizar
     private const int MAX_ESCUDOS = 3;
-    
+
     // Velocidade de movimento
     [SerializeField] private float velocidade = 5f;
 
@@ -46,7 +44,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
 
     // Quantidade de escudos que o player já utilizou
     private int _escudosUtilizados;
-    
+
     // Tempo até o proximo escudo
     private float _proximoEscudo;
 
@@ -79,7 +77,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
     {
         this.txtVida.text = $"{this.vida}";
     }
-    
+
     private void AtualizarEscudoUI()
     {
         this.txtEscudo.text = $"{(MAX_ESCUDOS - this._escudosUtilizados)}";
@@ -99,9 +97,9 @@ public class PlayerController : MonoBehaviour, ITomaDano
     private void Escudo()
     {
         this.AtualizarEscudoUI();
-        
+
         this._proximoEscudo -= Time.deltaTime;
-        
+
         if (this._escudo)
         {
             this._terminoEscudo -= Time.deltaTime;
@@ -112,7 +110,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
                 Destroy(this._escudo.gameObject);
                 this._escudo = null;
             }
-            
+
             return;
         }
 
@@ -120,7 +118,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
         {
             this._escudo = Instantiate(this.escudoPrefab, this.transform.position, Quaternion.identity);
             this._escudosUtilizados++;
-            
+
             this._terminoEscudo = this.tempoEscudo;
             this._proximoEscudo = this.intervaloEscudo;
         }
@@ -160,7 +158,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
         posicao.y += y;
 
         var tiro = Instantiate(objetoTiro, posicao, Quaternion.identity);
-        
+
         tiro.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, this.velocidadeTiro);
     }
 
@@ -197,6 +195,12 @@ public class PlayerController : MonoBehaviour, ITomaDano
             Destroy(this.gameObject);
 
             Instantiate(this.explosao, this.transform.position, Quaternion.identity);
+
+            var gameManager = FindObjectOfType<GameManager>();
+            if (gameManager)
+            {
+                gameManager.Reiniciar();
+            }
         }
     }
 
@@ -213,7 +217,7 @@ public class PlayerController : MonoBehaviour, ITomaDano
             {
                 this.levelTiro++;
             }
-            
+
             Destroy(other.gameObject);
         }
     }
